@@ -202,6 +202,19 @@
   
   See also: [`visibleDetailRows`](#), and [`selectedTo`](#)
 
+### # min-rows
+- type: _Number_
+- default: `0`
+- description
+
+  The minimum number of rows that should be displayed when rendering the table.
+  
+  If the number of row available is less than the number specified in `min-rows` prop, Vuetable will render empty table rows to 
+  satisfy that minimum rows.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `false`.
+
 ### # css
 - type: _Object_
 - default: 
@@ -217,12 +230,6 @@
   ```
 - description
 
-  description here
-
-### # min-rows
-- type: _Number_
-- default: `0`
-- description
-
-  description here
+  This is where you should override the CSS classes that Vuetable uses to render HTML table that should help you style the table
+  to your needs.
 
