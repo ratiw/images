@@ -1,22 +1,3 @@
-### # fields
-- type: _Array_
-- default: _none_
-- required: _true_
-- description
-
-  Array of field definition that Vuetable will be used to map to the data structure in order to render the table for presentation.
-
-### # api-url
-- type: _String_
-- default: `''` _(empty string)_
-- description
-
-  The URL of the api endpoint that Vuetable will interact with. If the API supports sorting, filtering, pagination of the data, 
-  Vuetable can automatically append appropriate information to the server via query string.
-  
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
 ### # api-mode
 - type: _Boolean_
 - default: `true`
@@ -32,6 +13,49 @@
   > Setting `api-mode` to `false` is not recommended. It will not scale well when you have to handle a large dataset
   > yourself instead of letting database manager handles it for you. This functionality is provided to 
 
+### # api-url
+- type: _String_
+- default: `''` _(empty string)_
+- description
+
+  The URL of the api endpoint that Vuetable will interact with. If the API supports sorting, filtering, pagination of the data, 
+  Vuetable can automatically append appropriate information to the server via query string.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+### # append-params
+- type: _Object_
+- default: `{}` _(empty object)_
+- description
+
+  Additional parameters that Vuetable should append to the query string when requesting data from the server. 
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+  See also: [Appending Other Parameters to the Query String](#)
+
+### # css
+- type: _Object_
+- default: 
+  ```
+  {
+    tableClass: 'ui blue selectable celled stackable attached table',
+    loadingClass: 'loading',
+    ascendingIcon: 'blue chevron up icon',
+    descendingIcon: 'blue chevron down icon',
+    detailRowClass: 'vuetable-detail-row',
+    sortHandleIcon: 'grey sidebar icon'
+  }
+  ```
+- description
+
+  This is where you should override the CSS classes that Vuetable uses to render HTML table that should help you style the table
+  to your needs.
+
+  See also: [CSS Styling](#)
+
 ### # data
 - type: _Array_
 - default: `null`
@@ -41,17 +65,6 @@
 
   > __Note__  
   > The prop only works when `api-mode` is `false`.
-
-### # load-on-start
-- type: _Boolean_
-- default: `true`
-- required: _true_
-- description
-
-  Whether Vuetable should immediately load the data from the server. 
-
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
 
 ### # data-path
 - type: _String_
@@ -64,6 +77,84 @@
   > __Note__  
   > The prop only works when `api-mode` is `true`.
 
+### # detail-row-component
+- type: _String_
+- default: `''` _(empty string)_
+- description
+
+  A component name to be used as the content of detail row to be displayed underneath the current row.
+
+### # detail-row-transition
+- type: _String_
+- default: `''` _(empty string)_
+- description
+
+  The CSS class to apply to detail row during transition.
+
+### # fields
+- type: _Array_
+- default: _none_
+- required: _true_
+- description
+
+  Array of field definition that Vuetable will be used to map to the data structure in order to render the table for presentation.
+
+### # http-options
+- type: _Object_
+- default: `{}` _(empty object)_
+- description
+
+  Allow passing additional options to the server during AJAX call. Internally, Vuetable uses [`axios`](https://github.com/mzabriskie/axios)
+  to handle AJAX request.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+### # load-on-start
+- type: _Boolean_
+- default: `true`
+- required: _true_
+- description
+
+  Whether Vuetable should immediately load the data from the server. 
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+### # min-rows
+- type: _Number_
+- default: `0`
+- description
+
+  The minimum number of rows that should be displayed when rendering the table.
+  
+  If the number of row available is less than the number specified in `min-rows` prop, Vuetable will render empty table rows to 
+  satisfy that minimum rows.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `false`.
+
+### # multi-sort
+- type: _Boolean_
+- default: `false`
+- description
+
+  Enable multiple sort columns interaction.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+### # multi-sort-key
+- type: _String_
+- default: `alt`
+- possible values: `alt`, `ctrl`, `shift`, `meta`
+- description
+
+  The key to trigger sort colum adding/subtracting when multi-sort is enabled.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
 ### # pagination-path 
 - type: _String_
 - default: `links.pagination`
@@ -73,6 +164,16 @@
   does not have pagination information, you should set the prop to empty string, e.g. `pagination-path=""`, to suppress
   Vuetable warning.
   
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+### # per-page
+- type: _Number_
+- default: `10`
+- description
+
+  The number of data to be requested per page.
+
   > __Note__  
   > The prop only works when `api-mode` is `true`.
 
@@ -96,71 +197,6 @@
 
   See also: [Sorting, Paging, and Page Sizing of Data](#)
   
-### # append-params
-- type: _Object_
-- default: `{}` _(empty object)_
-- description
-
-  Additional parameters that Vuetable should append to the query string when requesting data from the server. 
-  
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
-  See also: [Appending Other Parameters to the Query String](#)
-
-
-### # http-options
-- type: _Object_
-- default: `{}` _(empty object)_
-- description
-
-  Allow passing additional options to the server during AJAX call. Internally, Vuetable uses [`axios`](https://github.com/mzabriskie/axios)
-  to handle AJAX request.
-  
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
-### # per-page
-- type: _Number_
-- default: `10`
-- description
-
-  The number of data to be requested per page.
-
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
-### # sort-order
-- type: _Array_
-- default: `[]` _(empty array)_
-- description
-
-  The default sort order that Vuetable should use when requesting the data from server.
-
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
-### # multi-sort
-- type: _Boolean_
-- default: `false`
-- description
-
-  Enable multiple sort columns interaction.
-
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
-### # multi-sort-key
-- type: _String_
-- default: `alt`
-- possible values: `alt`, `ctrl`, `shift`, `meta`
-- description
-
-  The key to trigger sort colum adding/subtracting when multi-sort is enabled.
-
-  > __Note__  
-  > The prop only works when `api-mode` is `true`.
-
 ### # row-class
 - type: _String_, _Function_
 - default: `''` _(empty string)_
@@ -171,19 +207,15 @@
   If `row-class` prop refers to a method, Vuetable will automatically call the given method on each row, passing the row data
   and row index to it. Vuetable will then use the returned string from the given method as CSS class for that row.
   
-### # detail-row-component
-- type: _String_
-- default: `''` _(empty string)_
+### # sort-order
+- type: _Array_
+- default: `[]` _(empty array)_
 - description
 
-  A component name to be used as the content of detail row to be displayed underneath the current row.
+  The default sort order that Vuetable should use when requesting the data from server.
 
-### # detail-row-transition
-- type: _String_
-- default: `''` _(empty string)_
-- description
-
-  The CSS class to apply to detail row during transition.
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # track-by
 - type: _String_
@@ -201,35 +233,4 @@
   array (`selectedTo`). And when that row is unselected (unchecked), the `id` of that row is removed from the array.
   
   See also: [`visibleDetailRows`](#), and [`selectedTo`](#)
-
-### # min-rows
-- type: _Number_
-- default: `0`
-- description
-
-  The minimum number of rows that should be displayed when rendering the table.
-  
-  If the number of row available is less than the number specified in `min-rows` prop, Vuetable will render empty table rows to 
-  satisfy that minimum rows.
-
-  > __Note__  
-  > The prop only works when `api-mode` is `false`.
-
-### # css
-- type: _Object_
-- default: 
-  ```
-  {
-    tableClass: 'ui blue selectable celled stackable attached table',
-    loadingClass: 'loading',
-    ascendingIcon: 'blue chevron up icon',
-    descendingIcon: 'blue chevron down icon',
-    detailRowClass: 'vuetable-detail-row',
-    sortHandleIcon: 'grey sidebar icon'
-  }
-  ```
-- description
-
-  This is where you should override the CSS classes that Vuetable uses to render HTML table that should help you style the table
-  to your needs.
 
