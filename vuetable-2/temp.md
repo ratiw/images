@@ -161,33 +161,46 @@
   > __Note__  
   > The prop only works when `api-mode` is `true`.
 
-### # row-class-callback
+### # row-class
 - type: _String_, _Function_
 - default: `''` _(empty string)_
 - description
 
-  The method name of a callback to be called by Vuetable to get the CSS class name for each table row during rendering.
-
+  The CSS class name that will be applied to each table row. 
+  
+  If `row-class` prop refers to a method, Vuetable will automatically call the given method on each row, passing the row data
+  and row index to it. Vuetable will then use the returned string from the given method as CSS class for that row.
+  
 ### # detail-row-component
 - type: _String_
 - default: `''` _(empty string)_
 - description
 
-  description here
+  A component name to be used as the content of detail row to be displayed underneath the current row.
 
 ### # detail-row-transition
 - type: _String_
 - default: `''` _(empty string)_
 - description
 
-  description here
+  The CSS class to apply to detail row during transition.
 
 ### # track-by
 - type: _String_
 - default: `id`
 - description
 
-  description here
+  The key that uses to unqiuely identified each row in the data array to help track the state of detail row and checkbox 
+  features of Vuetable. This is necessary for the detail row and checkbox features to function correctly.
+  
+  For detail row feature, whenever the user click to expand the detail row, Vuetable will insert the `id` of that row into
+  its internal array (`visibleDetailRows`). And when that detail row is hidden, the `id` of that detail row is removed from
+  the array.
+  
+  For checkbox feature, when the user select (checked) a row, Vuetable will insert the `id` of the row into its internal 
+  array (`selectedTo`). And when that row is unselected (unchecked), the `id` of that row is removed from the array.
+  
+  See also: [`visibleDetailRows`](#), and [`selectedTo`](#)
 
 ### # css
 - type: _Object_
