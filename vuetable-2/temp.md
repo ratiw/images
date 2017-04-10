@@ -15,7 +15,7 @@
   Vuetable can automatically append appropriate information to the server via query string.
   
   > __Note__  
-  > `api-url` only works when `api-mode` is `true`.
+  > The prop only works when `api-mode` is `true`.
 
 ### # api-mode
 - type: _Boolean_
@@ -25,33 +25,56 @@
   By default, Vuetable will load the data from and send the request to the API endpoint specified in `api-url`. If you prefer to 
   supply your own data instead of automatically requesting the data from server, you have to set `api-mode` to `false`. Then, pass 
   the data via `data` prop.
-  
-  > Please note that 
+
+  Please not that disabling `api-mode` (by setting it to `false`) will also **disable** pagination, sorting, and filtering functions.
+
+  > __Note__  
+  > Setting `api-mode` to `false` is not recommended. It will not scale well when you have to handle a large dataset
+  > yourself instead of letting database manager handles it for you. This functionality is provided to 
 
 ### # data
 - type: _Array_
 - default: `null`
+- description
 
-description here
+  The data that Vuetable will be used to render the table when `api-mode` is set to `false`.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `false`.
 
 ### # load-on-start
 - type: _Boolean_
 - default: `true`
 - required: _true_
+- description
 
-description here
+  Whether Vuetable should immediately load the data from the server. 
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # data-path
 - type: _String_
 - default: `data`
+- description
+  
+  The path inside the data structure that actually contains the data. If the data is at the root of the structure, set 
+  this prop to empty string, e.g. `data-path=""`.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
-description here
-
-### # pagination-path
+### # pagination-path 
 - type: _String_
 - default: `links.pagination`
+- description
 
-description here
+  The pagination path inside the data structure that contains the pagination information. If the your data from the server
+  does not have pagination information, you should set the prop to empty string, e.g. `pagination-path=""`, to suppress
+  Vuetable warning.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # query-params
 - type: _Object_
@@ -63,69 +86,108 @@ description here
     perPage: 'per_page'
   }
   ```
+- description
 
-description here
+  The text to be used as keys in query string that will be sent to the server. If your API endpoint uses different keys, you can 
+  specified them via this prop.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
+  See also: [Sorting, Paging, and Page Sizing of Data](#)
+  
 ### # append-params
 - type: _Object_
 - default: `{}` _(empty object)_
+- description
 
-description here
+  Additional parameters that Vuetable should append to the query string when requesting data from the server. 
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
+
+  See also: [Appending Other Parameters to the Query String](#)
+
 
 ### # http-options
 - type: _Object_
 - default: `{}` _(empty object)_
+- description
 
-description here
+  Allow passing additional options to the server during AJAX call. Internally, Vuetable uses [`axios`](https://github.com/mzabriskie/axios)
+  to handle AJAX request.
+  
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # per-page
 - type: _Number_
 - default: `10`
+- description
 
-description here
+  The number of data to be requested per page.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # sort-order
 - type: _Array_
 - default: `[]` _(empty array)_
+- description
 
-description here
+  The default sort order that Vuetable should use when requesting the data from server.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # multi-sort
 - type: _Boolean_
 - default: `false`
+- description
 
-description here
+  Enable multiple sort columns interaction.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # multi-sort-key
 - type: _String_
 - default: `alt`
 - possible values: `alt`, `ctrl`, `shift`, `meta`
+- description
 
-description here
+  The key to trigger sort colum adding/subtracting when multi-sort is enabled.
+
+  > __Note__  
+  > The prop only works when `api-mode` is `true`.
 
 ### # row-class-callback
 - type: _String_, _Function_
 - default: `''` _(empty string)_
+- description
 
-description here
+  The method name of a callback to be called by Vuetable to get the CSS class name for each table row during rendering.
 
 ### # detail-row-component
 - type: _String_
 - default: `''` _(empty string)_
+- description
 
-description here
+  description here
 
 ### # detail-row-transition
 - type: _String_
 - default: `''` _(empty string)_
+- description
 
-description here
+  description here
 
 ### # track-by
 - type: _String_
 - default: `id`
+- description
 
-description here
+  description here
 
 ### # css
 - type: _Object_
@@ -140,11 +202,14 @@ description here
     sortHandleIcon: 'grey sidebar icon'
   }
   ```
-description here
+- description
+
+  description here
 
 ### # min-rows
 - type: _Number_
 - default: `0`
+- description
 
-description here
+  description here
 
